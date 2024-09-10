@@ -1,7 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}Crear Mensaje{% endblock %}
-
-{% block content %}
-<h1>Crear Nuevo Mensaje</h1>
-{% endblock %}
+    {% block title %}Enviar Mensaje{% endblock %}
+    
+    {% block content %}
+            <h1>Enviar Nuevo Mensaje</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    <label for="id_asunto">Asunto:</label>
+                    <input type="text" name="asunto" id="id_asunto" maxlength="100">
+                </div>
+                <div>
+                    <label for="id_texto">Texto:</label>
+                    <textarea name="texto" id="id_texto" rows="4" cols="50"></textarea>
+                </div>
+                <div>
+                    <label for="id_remitente">Remitente:</label>
+                    <input type="text" name="remitente" id="id_remitente" maxlength="100">
+                </div>
+                <div>
+                    <label for="id_destinatario">Destinatario:</label>
+                    <input type="text" name="destinatario" id="id_destinatario" maxlength="100">
+                </div>
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+    {% endblock %}

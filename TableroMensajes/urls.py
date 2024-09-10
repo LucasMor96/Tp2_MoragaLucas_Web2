@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from mensajes.views import InicioView, ListarMensajesView, DetalleMensajeView, EnviarMensajeView, EliminarMensajeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', InicioView.as_view(), name='inicio'),
+    path('mensajes/', ListarMensajesView.as_view(), name = 'listar_mensajes'),
+    path('mensajes/<int:pk>/', DetalleMensajeView.as_view(),name = 'detalles_mensaje'),
+    path('mensajes/enviar/', EnviarMensajeView.as_view(), name='enviar_mensaje'),
+    path('mensajes/eliminar/<int:pk>/', EliminarMensajeView.as_view(), name='eliminar_mensaje'),
 ]

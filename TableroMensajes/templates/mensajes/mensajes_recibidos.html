@@ -1,7 +1,50 @@
 {% extends 'base.html' %}
 
-{% block title %}Mensajes Recibidos{% endblock %}
+{% block title %}Mensajes{% endblock %}
 
 {% block content %}
-<h1>Mensajes Recibidos</h1>
+<h1>Mensajes</h1>
+
+<div class="tabs">
+    <a href="#" id="tabRecibidos" class="active" onclick="toggleTabs('recibidos')">Mensajes Recibidos</a>
+    <a href="#" id="tabEnviados" onclick="toggleTabs('enviados')">Mensajes Enviados</a>
+</div>
+
+<div id="contenidoRecibidos" class="tab-content active">
+    <h2>Mensajes Recibidos</h2>
+    <ul>
+        {% for mensaje in mensajes %}
+            {% if mensaje.destinatario == 'nombre_destinatario' %}
+                <li>
+                    <strong>Remitente:</strong> {{ mensaje.remitente }}<br>
+                    <strong>Asunto:</strong> {{ mensaje.asunto }}<br>
+                    <a href="{% url 'detalles_mensaje' mensaje.pk %}">Ver Detalles</a>
+                    <form method="post" action="{% url 'eliminar_mensaje' mensaje.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div id="contenidoEnviados" class="tab-content">
+    <h2>Mensajes Enviados</h2>
+    <ul>
+        {% for mensaje in mensajes %}
+            {% if mensaje.remitente == 'nombre_remitente' %}
+                <li>
+                    <strong>Destinatario:</strong> {{ mensaje.destinatario }}<br>
+                    <strong>Asunto:</strong> {{ mensaje.asunto }}<br>
+                    <a href="{% url 'detalles_mensaje' mensaje.pk %}">Ver Detalles</a>
+                    <form method="post" action="{% url 'eliminar_mensaje' mensaje.pk %}">
+                        {% csrf_token %}
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

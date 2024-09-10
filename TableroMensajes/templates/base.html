@@ -1,17 +1,42 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Tablero de Mensajes{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'mensajes/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'mensajes/estilos.css' %}">
 </head>
 <body>
-    {% include 'navbar.html' %}
-    <div class="container">
-        {% block content %}
-        <!-- Contenido específico de cada plantilla irá aquí -->
-        {% endblock %}
+    <div class="contenedor">
+        {% include 'navbar.html' %}
+        
+        <div class="contenido">
+            {% block content %}
+            <!-- Contenido de cada plantilla  -->
+            {% endblock %}
+        </div>
+
+        <footer style="align-items: center;">
+            <br><br
+            <i><p>Web II 2024 - TP2</p>
+            <p>Profesor: Lic. Julio C. Casco</p>
+            <p>Alumno: Moraga Lucas</p></i>
+        </footer>
     </div>
+    
+    <script>
+        function toggleTabs(tab) {
+            document.getElementById('contenidoRecibidos').style.display = (tab === 'recibidos') ? 'block' : 'none';
+            document.getElementById('contenidoEnviados').style.display = (tab === 'enviados') ? 'block' : 'none';
+
+            document.getElementById('tabRecibidos').classList.toggle('active', tab === 'recibidos');
+            document.getElementById('tabEnviados').classList.toggle('active', tab === 'enviados');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleTabs('recibidos');
+        });
+    </script>
 </body>
 </html>

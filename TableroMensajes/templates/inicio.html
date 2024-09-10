@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Inicio - Tablero de Mensajes{% endblock %}
+
+{% block content %}
+<h1>Bienvenido al Tablero de Mensajes</h1>
+<p>Seleccione una opción del menú para comenzar.</p>
+
+<div class="botones">
+    <a href="{% url 'listar_mensajes' %}?filtro=recibidos" class="boton">Ver Todos los Mensajes</a>
+    <a href="{% url 'enviar_mensaje' %}" class="boton">Enviar Mensaje</a>
+</div>
+{% endblock %}
+
