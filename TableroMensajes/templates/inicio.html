@@ -4,11 +4,21 @@
 
 {% block content %}
 <h1>Bienvenido al Tablero de Mensajes</h1>
-<p>Seleccione una opción del menú para comenzar.</p>
-
-<div class="botones">
-    <a href="{% url 'listar_mensajes' %}?filtro=recibidos" class="boton">Ver Todos los Mensajes</a>
-    <a href="{% url 'enviar_mensaje' %}" class="boton">Enviar Mensaje</a>
-</div>
+<h4>Tu plataforma de mensajería eficiente y segura</h2>
+    <p>
+        Con nuestra plataforma, podrás enviar y recibir mensajes, marcar tus mensajes favoritos, y gestionar tus mensajes eliminados 
+        de manera sencilla. Aquí tienes algunas de las características que ofrecemos:
+    </p>
+    <ul>
+        <li><strong>Envío y recepción de mensajes:</strong> Envía y recibe mensajes de manera instantánea.</li>
+        <li><strong>Mensajes favoritos:</strong> Marca tus mensajes importantes como favoritos para un acceso rápido.</li>
+        <li><strong>Papelera de reciclaje:</strong> Recupera mensajes eliminados fácilmente desde la papelera.</li>
+        <li><strong>Búsqueda avanzada:</strong> Utiliza nuestra barra de búsqueda para encontrar mensajes específicos rápidamente.</li>
+    </ul>
+    <div style="text-align: center"><h4>Comienza ahora revisando tus mensajes</h4>
+        <div class="botones">
+            <a href="{% url 'listar_mensajes' %}?filtro=todos" class="boton">Ver Todos los Mensajes</a>
+        </div>
+    </div>
 {% endblock %}
 

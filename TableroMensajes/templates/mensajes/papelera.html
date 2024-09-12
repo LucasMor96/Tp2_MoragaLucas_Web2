@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Papelera{% endblock %}
+
+{% block content %}
+<h4>Mensajes eliminados:</h4>
+
+<table class="table table-striped table-hover">
+    <tbody>
+        {% for mensaje in mensajes %}
+            {% if mensaje.eliminado %}
+                <tr class="mensaje-fila">
+                    <td colspan="2" class="mensaje-contenido">
+                        <div class="mensaje-header">
+                            <h4 style="margin-left: 10 px;">{{ mensaje.asunto|capfirst }}</h4>
+                            <span class="fecha-envio">{{ mensaje.fecha_envio }}</span>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" onclick="verDetalle('{{ mensaje.id|escapejs }}')">Abrir/Cerrar mensaje</button>
+                        <div id="detalles-{{ mensaje.id }}" style="display:none;">   
+                                    <div class="card card-body">
+                                        <i><b>Enviado a:</b> {{ mensaje.destinatario|capfirst }} &nbsp; <b>De:</b> {{ mensaje.remitente|capfirst }}</i>
+                                        <br><br>
+                                        <span style="margin-left: 10%;">-{{ mensaje.texto }}</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <form method="post" style="float: right;" action="{% url 'eliminar_mensaje' mensaje.pk %}">
+                            {% csrf_token %}
+                            <button type="submit"class="btn btn-outline-danger">Eliminar definitivamente</button>
+                        </form>
+                        <form method="post" style="float: right;" action="{% url 'recuperar_mensaje' mensaje.pk %}"></form>
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-success">Restaurar Mensaje</button>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

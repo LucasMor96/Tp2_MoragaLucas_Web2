@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Mensaje{% endblock %}
+
+{% block content %}
+<h1>Detalle del Mensaje</h1>
+<!-- _detalle_mensaje.html -->
+<div class="mensaje-detalle">
+    <table class="tabla-mensaje">
+        <tr>
+            <td><strong>Texto:</strong></td>
+            <td>{{ mensaje.texto }}</td>
+        </tr>
+        <tr>
+            <td><strong>Fecha de Envío:</strong></td>
+            <td>{{ mensaje.fecha_envio }}</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
+
