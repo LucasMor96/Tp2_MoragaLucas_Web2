@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from mensajes.views import (
     InicioView, ListarMensajesView, DetalleMensajeView, 
-    EnviarMensajeView, EliminarMensajeView, eliminarPapelera, PapeleraMensajesView, marcarFavorito, recuperarMensaje
+    EnviarMensajeView, EliminarMensajeView, eliminarPapelera, PapeleraMensajesView, marcarFavorito, recuperarMensaje,buscar_mensajes
 )
 
 urlpatterns = [
@@ -32,4 +32,5 @@ urlpatterns = [
     path('mensajes/enviar_papelera/<int:pk>/', eliminarPapelera, name='enviar_papelera'),
     path('mensajes/recuperar_mensaje/<int:pk>/', recuperarMensaje, name='recuperar_mensaje'),
     path('mensajes/marcar_favorito/<int:pk>/', marcarFavorito, name='marcar_favorito'),
+    path('mensajes/buscar/', buscar_mensajes, name='buscar_mensajes'),
 ]

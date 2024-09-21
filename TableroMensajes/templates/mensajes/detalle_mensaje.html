@@ -4,18 +4,22 @@
 
 {% block content %}
 <h1>Detalle del Mensaje</h1>
-<!-- _detalle_mensaje.html -->
-<div class="mensaje-detalle">
-    <table class="tabla-mensaje">
-        <tr>
-            <td><strong>Texto:</strong></td>
-            <td>{{ mensaje.texto }}</td>
-        </tr>
-        <tr>
-            <td><strong>Fecha de Envío:</strong></td>
-            <td>{{ mensaje.fecha_envio }}</td>
-        </tr>
-    </table>
-</div>
+{% for mensaje in mensajes %}
+<tr class="mensaje-fila">
+    <td colspan="2" class="mensaje-contenido">
+        <div class="mensaje-header">
+            <h4 style="margin-left: 10px;">{{ mensaje.asunto|capfirst }}</h4>
+            <span class="fecha-envio">{{ mensaje.fecha_envio }}</span>
+        </div>
+        <div class="card" style="width: 40rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">De: {{mensaje.remitente}}</li>
+              <li class="list-group-item">Para: {{mensaje.destinatario}}</li>
+              <li class="list-group-item">{{mensaje.texto}}</li>
+            </ul>
+        </div>
+    </td>
+</tr>
+{% endfor %}
 {% endblock %}
 

@@ -5,83 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Tablero de Mensajes{% endblock %}</title>
-    <link href="{% static 'mensajes/bootstrap.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'mensajes/estilos.css' %}">
+    <link href="{% static 'mensajes/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'mensajes/css/estilos.css' %}">
 </head>
 <body>
     <div class="contenedor">
-        {% include 'navbar.html' %}
-        
+        {% include 'navbar.html' %} 
         <div class="contenido">
             {% block content %}
             <!-- Contenido de cada plantilla-->
-            {% endblock %}
+             {% endblock %}
         </div>
-        <footer class="mt-5">
-            <div style="text-align: center;">
-        <p>&copy; 2023 Tablero de Mensajes. Todos los derechos reservados.</p>
-        <p>Web II 2024 - TP2</p>
+    <footer class="mt-5">
+        <div style="text-align: center;">
+            <p>&copy; 2023 Tablero de Mensajes. Todos los derechos reservados.</p>
+            <p>Web II 2024 - TP2</p>
             <p>Profesor: Lic. Julio C. Casco</p>
             <p>Alumno: Moraga Lucas</p>
-        </div>
-        </footer>
     </div>
-    
-    <!-- Script para buscar mensajes -->
-    <script>
-        function buscarMensajes() {
-            let filtro = document.querySelector('.tabs a.active').getAttribute('href').split('filtro=')[1];
-            let barrabuscar = document.getElementById('barrabuscar').value;
-            window.location.href = "{% url 'listar_mensajes' %}?filtro=" + filtro + "&barrabuscar=" + barrabuscar;
-        }
-        </script>
-    <script>
-        function buscarMensajes() {
-            // Obtener el filtro activo
-            let filtro = document.querySelector('.tabs .active').getAttribute('href').split('filtro=')[1];
-            // Obtener el término de búsqueda
-            let barrabuscar = document.getElementById('barrabuscar').value;
-            // Redirigir a la URL con los parámetros correctos
-            window.location.href = "{% url 'listar_mensajes' %}?filtro=" + filtro + "&barrabuscar=" + barrabuscar;
-        }
-        </script>
+    </footer>
+    </div>
 
-</script>
-</script>
-    <!-- Script para mostrar y ocultar detalles -->
-    <script>
-        function verDetalle(id) {
-            var detalles = document.getElementById('detalles-' + id);
-            if (detalles.style.display === 'none') {
-                detalles.style.display = 'block';
-            } else {
-                detalles.style.display = 'none';
-            }
-        }
-    </script>
-        
+   <!-- Script para cambiar de pestaña activa --> 
+   <!-- ESTE SCRIPT FUE DESABILITADO POR INCOMPATIBILIDAD CON BOOTSTRAP --> 
+-<script>
+    function toggleTabs(tab) {
+        // Mostrar u ocultar el contenido basado en la pestaña seleccionada
+        document.getElementById('contenidoTodos').style.display = (tab === 'todos') ? 'block' : 'none';
+        document.getElementById('contenidoRecibidos').style.display = (tab === 'recibidos') ? 'block' : 'none';
+        document.getElementById('contenidoEnviados').style.display = (tab === 'enviados') ? 'block' : 'none';
+        document.getElementById('contenidoFavoritos').style.display = (tab === 'favoritos') ? 'block' : 'none';
 
-    <!-- Script para cambiar de pestaña activa -->
-    
-    <script>
-        function toggleTabs(tab) {
-            document.getElementById('contenidoTodos').style.display = (tab === 'todos') ? 'block' : 'none';
-            document.getElementById('contenidoRecibidos').style.display = (tab === 'recibidos') ? 'block' : 'none';
-            document.getElementById('contenidoEnviados').style.display = (tab === 'enviados') ? 'block' : 'none';
-            document.getElementById('contenidoFavoritos').style.display = (tab === 'favoritos') ? 'block' : 'none';
+        // Cambiar la clase 'active' en la pestaña seleccionada
+        document.getElementById('tabTodos').classList.toggle('active', tab === 'todos');
+        document.getElementById('tabRecibidos').classList.toggle('active', tab === 'recibidos');
+        document.getElementById('tabEnviados').classList.toggle('active', tab === 'enviados');
+        document.getElementById('tabFavoritos').classList.toggle('active', tab === 'favoritos');
 
-            document.getElementById('tabTodos').classList.toggle('active', tab === 'todos');
-            document.getElementById('tabRecibidos').classList.toggle('active', tab === 'recibidos');
-            document.getElementById('tabEnviados').classList.toggle('active', tab === 'enviados');
-            document.getElementById('tabFavoritos').classList.toggle('active', tab === 'favoritos');
-        }
-    
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const filtro = urlParams.get('filtro') || 'todos';
-            toggleTabs(filtro);
-        });
-    </script>
-    
+        // Actualizar el valor del campo oculto de filtro en el formulario
+        document.querySelector('input[name="filtro"]').value = tab;
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const filtro = urlParams.get('filtro') || 'todos';
+        // Establecer la pestaña activa al cargar la página
+        toggleTabs(filtro);
+    });
+    // Escuchar eventos de click en las pestañas para cambiar el valor del filtro
+    document.getElementById('tabTodos').addEventListener('click', function() {
+        toggleTabs('todos');
+    });
+    document.getElementById('tabRecibidos').addEventListener('click', function() {
+        toggleTabs('recibidos');
+    });
+    document.getElementById('tabEnviados').addEventListener('click', function() {
+        toggleTabs('enviados');
+    });
+    document.getElementById('tabFavoritos').addEventListener('click', function() {
+        toggleTabs('favoritos');
+    });
+</script>   
+
+<script src="{% static 'mensajes/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
